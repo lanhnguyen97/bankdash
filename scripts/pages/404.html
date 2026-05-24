@@ -5,20 +5,32 @@
     <title>BankDash</title>
     <!--
       Single Page Apps for GitHub Pages — https://github.com/rafgraph/spa-github-pages
-      Pages serves this one 404.html for any path it can't find. We keep the first two
-      segments (/<repo>/<framework>) and hand the rest to that app's index.html, which
-      restores the real URL via the snippet in its <head>.
+      Pages serves this 404.html for any unknown path under /bankdash/. The apps live at
+      /bankdash/<app>/. For a deep link into a known app we keep /bankdash/<app> and hand the
+      rest to that app's index.html (restored by the snippet in its <head>). Anything that
+      ISN'T a known app goes to the landing page — otherwise a missing index would make the
+      redirect loop forever (e.g. a stale /bankdash/dashboard link from an older deploy).
     -->
     <script type="text/javascript">
-      var pathSegmentsToKeep = 2; // /<repo>/<framework>
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      (function () {
+        var REPO = 'bankdash';
+        var APPS = ['react', 'vue', 'angular'];
+        var l = window.location;
+        var segs = l.pathname.split('/').filter(Boolean); // ['bankdash','react','transactions',...]
+        if (segs[0] === REPO && APPS.indexOf(segs[1]) !== -1) {
+          var keep = 2; // /<repo>/<app>
+          l.replace(
+            l.protocol + '//' + l.host + '/' +
+            segs.slice(0, keep).join('/') + '/?/' +
+            segs.slice(keep).join('/').replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash
+          );
+        } else {
+          // unknown path (or stale link) -> landing page; never loops
+          l.replace('/' + REPO + '/');
+        }
+      })();
     </script>
   </head>
   <body></body>
