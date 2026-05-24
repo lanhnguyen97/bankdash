@@ -1,0 +1,11 @@
+<div class="min-h-screen bg-page">
+  <div class="flex">
+    <app-sidebar [mobileOpen]="mobileOpen()" (close)="mobileOpen.set(false)" />
+    <div class="flex-1 min-w-0">
+      <app-header (menuClick)="mobileOpen.set(true)" />
+      <main class="px-4 sm:px-6 lg:px-10 py-6 lg:py-8">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+</div>

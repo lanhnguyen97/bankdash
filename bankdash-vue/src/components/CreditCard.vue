@@ -1,0 +1,56 @@
+<script setup lang="ts">
+defineProps<{
+  variant: 'dark' | 'light';
+  balance: string;
+  holder: string;
+  validThru: string;
+  number: string;
+}>();
+</script>
+
+<template>
+  <div
+    class="w-full max-w-[350px] h-[235px] rounded-card overflow-hidden relative justify-self-center sm:justify-self-stretch"
+    :style="
+      variant === 'dark'
+        ? { background: 'linear-gradient(135deg, #4c49ed 0%, #0a06f4 100%)' }
+        : { background: '#ffffff', border: '1px solid #dfeaf2' }
+    "
+  >
+    <div class="p-6 pb-0">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-2xs font-normal" :class="variant === 'dark' ? 'text-white/90' : 'text-ink-muted'">Balance</div>
+          <div class="mt-1 text-2xl font-medium" :class="variant === 'dark' ? 'text-white' : 'text-ink'">{{ balance }}</div>
+        </div>
+        <svg viewBox="0 0 35 35" width="35" height="35" fill="none">
+          <rect x="2" y="6" width="31" height="23" rx="4" :fill="variant === 'dark' ? '#ffffff' : '#9199af'" opacity="0.9" />
+          <rect x="2" y="13" width="31" height="2" fill="#000" opacity="0.15" />
+          <rect x="2" y="20" width="31" height="2" fill="#000" opacity="0.15" />
+          <rect x="11" y="6" width="2" height="23" fill="#000" opacity="0.15" />
+          <rect x="22" y="6" width="2" height="23" fill="#000" opacity="0.15" />
+        </svg>
+      </div>
+      <div class="mt-7 flex items-start gap-12">
+        <div>
+          <div class="text-2xs uppercase tracking-wide" :class="variant === 'dark' ? 'text-white/70' : 'text-ink-muted'">Card Holder</div>
+          <div class="mt-1 text-base font-medium" :class="variant === 'dark' ? 'text-white' : 'text-ink'">{{ holder }}</div>
+        </div>
+        <div>
+          <div class="text-2xs uppercase tracking-wide" :class="variant === 'dark' ? 'text-white/70' : 'text-ink-muted'">Valid Thru</div>
+          <div class="mt-1 text-base font-medium" :class="variant === 'dark' ? 'text-white' : 'text-ink'">{{ validThru }}</div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute left-0 right-0 bottom-0 h-[70px] flex items-center justify-between px-6"
+      :class="variant === 'dark' ? 'bg-white/15' : 'border-t border-line'"
+    >
+      <div class="text-xl font-semibold tracking-wider" :class="variant === 'dark' ? 'text-white' : 'text-ink'">{{ number }}</div>
+      <div class="relative w-[44px] h-[30px]">
+        <span class="absolute left-0 top-0 w-[30px] h-[30px] rounded-full" :style="{ backgroundColor: variant === 'dark' ? '#ffffff' : '#9199af', opacity: 0.5 }" />
+        <span class="absolute right-0 top-0 w-[30px] h-[30px] rounded-full" :style="{ backgroundColor: variant === 'dark' ? '#ffffff' : '#9199af', opacity: 0.5 }" />
+      </div>
+    </div>
+  </div>
+</template>

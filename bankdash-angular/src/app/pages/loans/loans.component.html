@@ -1,0 +1,32 @@
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[20px] xl:gap-[30px] mb-[30px]">
+  <app-stat-card iconBg="#e7edff" iconColor="#396aff" label="Personal Loans" value="$50,000" iconPath="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-4 0-7 2-7 5v1h14v-1c0-3-3-5-7-5z" />
+  <app-stat-card iconBg="#fff5d9" iconColor="#fbb937" label="Corporate Loans" value="$100,000" iconPath="M3 7h18v13H3zM8 7V4h8v3" />
+  <app-stat-card iconBg="#ffe0eb" iconColor="#fe5c73" label="Business Loans" value="$500,000" iconPath="M3 17l6-6 4 4 8-8" />
+  <app-stat-card iconBg="#dcfaf8" iconColor="#16dbcc" label="Custom Loans" value="Choose Money" iconPath="M14 4l6 6-10 10H4v-6z" />
+</section>
+
+<section>
+  <h2 class="text-3xl font-semibold text-ink mb-5">Active Loans Overview</h2>
+  <div class="bg-white rounded-card p-6 overflow-x-auto">
+    <div class="grid grid-cols-[0.5fr_1fr_1fr_1fr_1fr_1.2fr_0.8fr] gap-4 pb-3 text-md text-ink-muted border-b border-line min-w-[840px]">
+      <div>SL No</div><div>Loan Money</div><div>Left to repay</div><div>Duration</div><div>Interest rate</div><div>Installment</div><div>Repay</div>
+    </div>
+    <div
+      *ngFor="let l of loans"
+      class="grid grid-cols-[0.5fr_1fr_1fr_1fr_1fr_1.2fr_0.8fr] gap-4 py-4 text-md text-ink border-b border-line/40 items-center min-w-[840px]"
+    >
+      <div class="text-ink-muted">{{ l.sl }}</div>
+      <div>{{ l.money }}</div>
+      <div>{{ l.left }}</div>
+      <div>{{ l.duration }}</div>
+      <div>{{ l.rate }}</div>
+      <div>{{ l.emi }}</div>
+      <div>
+        <button class="px-5 h-[30px] rounded-pill border border-brand-accent text-base font-medium text-brand-accent hover:bg-brand-accent/5">Repay</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-[0.5fr_1fr_1fr_1fr_1fr_1.2fr_0.8fr] gap-4 pt-4 text-md font-semibold min-w-[840px]" style="color: #fe5c73">
+      <div *ngFor="let t of totals">{{ t }}</div>
+    </div>
+  </div>
+</section>

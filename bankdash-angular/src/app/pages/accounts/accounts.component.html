@@ -1,0 +1,104 @@
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[20px] xl:gap-[30px] mb-[30px]">
+  <app-stat-card iconBg="#fff5d9" iconColor="#fbb937" label="My Balance" value="$12,750" iconPath="M6 8h12v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8z M9 8V6a3 3 0 0 1 6 0v2" />
+  <app-stat-card iconBg="#e7edff" iconColor="#396aff" label="Income" value="$5,600" iconPath="M12 8a4 4 0 0 1 4 4M12 16a4 4 0 0 1-4-4M12 4v16" />
+  <app-stat-card iconBg="#ffe0eb" iconColor="#fe5c73" label="Expense" value="$3,460" iconPath="M5 8h14v2H5zM5 12h14v2H5zM5 16h14v2H5z" />
+  <app-stat-card iconBg="#dcfaf8" iconColor="#16dbcc" label="Total Saving" value="$7,920" iconPath="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" />
+</section>
+
+<section class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-[30px] mb-[30px]">
+  <div>
+    <h2 class="text-3xl font-semibold text-ink mb-5">Last Transaction</h2>
+    <div class="bg-white rounded-card p-6 overflow-x-auto">
+      <div
+        *ngFor="let tx of transactions; let i = index; let last = last"
+        class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] gap-4 items-center py-3 min-w-[650px]"
+        [ngClass]="!last ? 'border-b border-line' : ''"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-[40px] h-[40px] rounded-avatar flex items-center justify-center" [style.background]="tx.iconBg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" [attr.stroke]="tx.iconColor" stroke-width="2" />
+            </svg>
+          </div>
+          <div>
+            <div class="text-base font-medium text-ink">{{ tx.name }}</div>
+            <div class="text-2xs text-ink-muted">25 Jan 2021</div>
+          </div>
+        </div>
+        <div class="text-base text-ink-muted">{{ tx.type }}</div>
+        <div class="text-base text-ink-muted">{{ tx.card }}</div>
+        <div class="text-base text-ink-muted">{{ tx.status }}</div>
+        <div class="text-base font-medium text-right" [style.color]="tx.positive ? '#41d4a8' : '#ff4b4a'">{{ tx.amount }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-3xl font-semibold text-ink">My Card</h2>
+      <a href="#" class="text-base font-semibold text-ink hover:underline">See All</a>
+    </div>
+    <div class="w-full h-[170px] rounded-card relative overflow-hidden" style="background: linear-gradient(135deg, #4c49ed 0%, #0a06f4 100%)">
+      <div class="p-5">
+        <div class="text-2xs text-white/80">Balance</div>
+        <div class="text-xl font-semibold text-white">$5,756</div>
+        <div class="mt-4 flex items-start gap-8">
+          <div>
+            <div class="text-2xs text-white/70 uppercase">Card Holder</div>
+            <div class="text-sm text-white font-medium">Eddy Cusuma</div>
+          </div>
+          <div>
+            <div class="text-2xs text-white/70 uppercase">Valid Thru</div>
+            <div class="text-sm text-white font-medium">12/22</div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 right-0 h-[44px] bg-white/15 flex items-center justify-between px-5">
+        <div class="text-sm font-semibold tracking-wider text-white">3778 **** **** 1234</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-[30px]">
+  <div>
+    <h2 class="text-3xl font-semibold text-ink mb-5">Debit & Credit Overview</h2>
+    <div class="bg-white rounded-card p-6 h-[280px]">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-base text-ink-muted">
+          <span class="text-ink font-semibold">$7,560 Debited</span> &amp;
+          <span class="text-ink font-semibold">$5,420 Credited</span> in this Week
+        </p>
+        <div class="flex items-center gap-5 text-base text-ink">
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-brand"></span>Debit</div>
+          <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background: #fbb937"></span>Credit</div>
+        </div>
+      </div>
+      <div class="h-[80%]">
+        <app-chart [config]="chartConfig" />
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-3xl font-semibold text-ink mb-5">Invoices Sent</h2>
+    <div class="bg-white rounded-card p-6">
+      <div
+        *ngFor="let inv of invoices; let i = index; let last = last"
+        class="flex items-center gap-3 py-3"
+        [ngClass]="!last ? 'border-b border-line/50' : ''"
+      >
+        <div class="w-[40px] h-[40px] rounded-avatar flex items-center justify-center" [style.background]="inv.iconBg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" [attr.stroke]="inv.iconColor" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="flex-1">
+          <div class="text-base font-medium text-ink">{{ inv.name }}</div>
+          <div class="text-2xs text-ink-muted">{{ inv.date }}</div>
+        </div>
+        <div class="text-base font-semibold text-ink">{{ inv.amount }}</div>
+      </div>
+    </div>
+  </div>
+</section>

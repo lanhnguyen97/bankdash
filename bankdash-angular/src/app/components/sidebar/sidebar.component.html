@@ -1,0 +1,38 @@
+<button
+  *ngIf="mobileOpen"
+  aria-label="Close menu"
+  class="lg:hidden fixed inset-0 bg-black/40 z-40"
+  (click)="close.emit()"
+></button>
+<aside
+  class="bg-white border-r border-line min-h-screen fixed lg:sticky top-0 left-0 z-50 w-[250px] shrink-0 transition-transform duration-200 lg:translate-x-0"
+  [class.translate-x-0]="mobileOpen"
+  [class.-translate-x-full]="!mobileOpen"
+>
+  <div class="h-[80px] lg:h-[100px] flex items-center px-6 lg:px-10">
+    <img src="assets/icons/logo.svg" alt="BankDash" class="h-9" />
+  </div>
+  <nav class="pt-2">
+    <a
+      *ngFor="let it of items"
+      [routerLink]="it.to"
+      routerLinkActive="text-ink"
+      [routerLinkActiveOptions]="{ exact: it.to === '/dashboard' }"
+      #rla="routerLinkActive"
+      [ngClass]="rla.isActive ? 'text-ink' : 'text-ink-muted'"
+      class="relative flex items-center gap-7 h-[56px] lg:h-[60px] pl-10 text-md font-medium"
+    >
+      <span
+        *ngIf="rla.isActive"
+        class="absolute left-0 top-0 bottom-0 w-[6px] bg-brand-accent rounded-r-[10px]"
+      ></span>
+      <img
+        [src]="'assets/icons/' + it.icon + '.svg'"
+        alt=""
+        class="w-[25px] h-[25px]"
+        [style.filter]="rla.isActive ? blueFilter : null"
+      />
+      <span>{{ it.label }}</span>
+    </a>
+  </nav>
+</aside>
