@@ -1,11 +1,14 @@
-name: Deploy React to GitHub Pages
+name: Deploy all three to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - 'bankdash-dashboard/**'
-      - '.github/workflows/deploy-react-to-pages.yml'
+      - 'bankdash-vue/**'
+      - 'bankdash-angular/**'
+      - 'scripts/**'
+      - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -20,9 +23,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: bankdash-dashboard
     steps:
       - uses: actions/checkout@v4
 
@@ -30,23 +30,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: bankdash-dashboard/package-lock.json
+          cache-dependency-path: |
+            bankdash-dashboard/package-lock.json
+            bankdash-vue/package-lock.json
+            bankdash-angular/package-lock.json
 
-      - name: Install
-        run: npm ci
-
-      - name: Build with GH Pages base path
-        # Pages serves at username.github.io/REPO_NAME/ — base must match
-        run: npm run build -- --base=/bankdash/
-
-      - name: Copy index.html to 404.html for SPA fallback
-        run: cp dist/index.html dist/404.html
+      # Builds react/vue/angular with their /bankdash/<fw>/ base paths and
+      # assembles site/ (landing + 404 + the three apps).
+      - name: Build all three apps into site/
+        run: node scripts/build-pages.mjs
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: bankdash-dashboard/dist
+          path: site
 
   deploy:
     needs: build

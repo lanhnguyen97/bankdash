@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BankDash — React · Vue · Angular</title>
+    <meta name="description" content="The same banking dashboard built three times — React, Vue, and Angular." />
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #f5f7fa; color: #0f172a; min-height: 100vh;
+        display: flex; align-items: center; justify-content: center; padding: 24px;
+      }
+      .wrap { width: 100%; max-width: 920px; }
+      h1 { font-size: clamp(28px, 5vw, 44px); letter-spacing: -0.02em; }
+      p.lead { margin-top: 12px; color: #475569; font-size: 18px; max-width: 620px; }
+      .grid { margin-top: 36px; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      a.card {
+        display: block; text-decoration: none; color: inherit; background: #fff;
+        border: 1px solid #e2e8f0; border-radius: 18px; padding: 24px;
+        transition: transform .15s ease, box-shadow .15s ease;
+      }
+      a.card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(15,23,42,.08); }
+      .badge { font-size: 13px; font-weight: 600; color: #2563eb; text-transform: uppercase; letter-spacing: .08em; }
+      .name { margin-top: 10px; font-size: 22px; font-weight: 700; }
+      .stack { margin-top: 6px; color: #64748b; font-size: 14px; }
+      footer { margin-top: 40px; color: #94a3b8; font-size: 14px; }
+      footer a { color: #475569; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>BankDash</h1>
+      <p class="lead">The same responsive banking dashboard, built three times. Pick a framework to open its live demo.</p>
+      <div class="grid">
+        <a class="card" href="./react/">
+          <div class="badge">React</div>
+          <div class="name">React&nbsp;19 + Vite</div>
+          <div class="stack">TypeScript · Tailwind · recharts · React Router</div>
+        </a>
+        <a class="card" href="./vue/">
+          <div class="badge">Vue</div>
+          <div class="name">Vue&nbsp;3 + Vite</div>
+          <div class="stack">TypeScript · Tailwind · chart.js · Vue Router</div>
+        </a>
+        <a class="card" href="./angular/">
+          <div class="badge">Angular</div>
+          <div class="name">Angular&nbsp;19</div>
+          <div class="stack">TypeScript · Tailwind · chart.js</div>
+        </a>
+      </div>
+      <footer>
+        Free MIT-licensed template ·
+        <a href="https://github.com/lanhnguyen97/bankdash">Source on GitHub</a>
+      </footer>
+    </div>
+  </body>
+</html>
