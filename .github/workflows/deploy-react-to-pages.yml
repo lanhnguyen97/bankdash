@@ -36,7 +36,8 @@ jobs:
         run: npm ci
 
       - name: Build with GH Pages base path
-        run: npm run build -- --base=/bankdash/bankdash-dashboard/
+        # Pages serves at username.github.io/REPO_NAME/ — base must match
+        run: npm run build -- --base=/bankdash/
 
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/index.html dist/404.html
