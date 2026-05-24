@@ -13,7 +13,9 @@ import Preferences from '../pages/settings/Preferences.vue';
 import Security from '../pages/settings/Security.vue';
 
 const router = createRouter({
-  history: createWebHistory(),
+  // import.meta.env.BASE_URL reflects the build --base (e.g. /bankdash/vue/),
+  // so routing works under any deploy prefix (GitHub Pages, Vercel root, etc.)
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', redirect: '/dashboard' },
     { path: '/dashboard', component: Dashboard },
