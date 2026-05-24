@@ -66,7 +66,7 @@ function ChartCard({ title, data, color }: { title: string; data: typeof yearlyD
             />
             <Tooltip
               contentStyle={{ borderRadius: 8, border: 'none', boxShadow: '0 4px 16px rgba(0,0,0,0.08)', fontSize: 13 }}
-              formatter={(v: number) => [<MoneyFormat v={v} />, 'Value']}
+              formatter={(v) => [<MoneyFormat v={Number(v)} />, 'Value']}
             />
             <Line type="monotone" dataKey="value" stroke={color} strokeWidth={3} dot={{ fill: color, r: 4 }} />
           </LineChart>

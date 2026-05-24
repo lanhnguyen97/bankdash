@@ -16,10 +16,12 @@ const data = [
   { month: 'Jan', value: 220 },
 ];
 
-function HighlightLabel(props: {
-  x?: number; y?: number; width?: number; index?: number;
-}) {
-  const { x = 0, y = 0, width = 0, index = 0 } = props;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function HighlightLabel(props: any) {
+  const x = Number(props.x ?? 0);
+  const y = Number(props.y ?? 0);
+  const width = Number(props.width ?? 0);
+  const index = Number(props.index ?? 0);
   const d = data[index];
   if (!d?.label) return null;
   return (
